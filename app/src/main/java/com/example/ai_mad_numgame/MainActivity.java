@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         textView2=findViewById(R.id.textView2);
         newMatch();
         sharedPreferences=this.getSharedPreferences("com.example.aiapp_2022", Context.MODE_PRIVATE);
-        int[][]dataFrame=dataPrep(); //dataPrep function returns a two-dimenssional array
+        int[][]dataFrame=dataPrep(); //dataPrep function returns a two-dimensional array
         double slope=LR.getSlope(dataFrame); //LR class, which provides slope on invoking getSlope
         new AlertDialog.Builder(this)
                // .setIcon() //your custom icon
@@ -138,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
     public int sumOfScore(){
         //Computing the sum of score array, which has the 1 or in each index,depending on correct or incorrect answers
         int sum=0;
-       // your code here
+        for (int i=0; i<3; i++)
+            sum+=score[i];
         return sum;
     }
 
@@ -157,7 +158,14 @@ public class MainActivity extends AppCompatActivity {
 
     public String getInterpretation(int [][]dataFrame,double slope){
        //provide interpretation based on your slope analysis
-        // Your code here
-        return "Your Interpretation";
+        if(slope==0 && dataFrame[0][1]==3)
+            return "You Achieved Perfection";
+        else if(slope>0 && slope<=0.5)
+            return "You are slow and steady";
+        else if (slope>0.5)
+            return "You are Getting Better";
+        else
+            return"You are not attentive";
+//        return "Your Interpretation";
     }
 }
